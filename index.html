@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>E‑Learning – Current Affairs</title>
 <style>
 /* ---------- Global reset & typography ---------- */
@@ -57,7 +58,6 @@ main{
   gap:1.5rem;
   grid-template-columns:1fr;
 }
-/* @media(min-width:480px){main{grid-template-columns:1fr 1fr}} */
 
 /* ---------- Lesson cards ---------- */
 .lesson{
@@ -108,23 +108,57 @@ footer{
 #completeOverlay .msg{
   background:#fff;padding:2rem 3rem;border-radius:12px;
   text-align:center;animation:pop .6s ease-out;
+  /* Responsive additions */
+  max-width: 90%;
+  margin: 1rem;
 }
 #completeOverlay .msg h2{
   margin:0 0 .5rem;color:var(--accent);
 }
 .msg p{color: #000;}
 
+
+/* ======================================= */
+/* ---------- Media Queries for smaller devices ---------- */
+/* ======================================= */
+
+@media (max-width: 480px) {
+    /* Adjust font sizes for mobile readability */
+    header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .lesson h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Adjust padding in the header */
+    header {
+        padding: 0.8rem;
+    }
+    
+    /* Adjust dark-mode toggle position for less crowded header */
+    #theme-toggle {
+        right: 0.5rem;
+        top: 0.5rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    /* Adjust completion message padding */
+    #completeOverlay .msg {
+        padding: 1.5rem 2rem;
+    }
+}
 </style>
 </head>
 <body>
 <header>
   <h1>Daily Current Affairs</h1>
-  <!-- <div id="progress">Lesson 1 of 3</div> -->
+  <div id="progress"></div>
   <button id="theme-toggle">🌙</button>
 </header>
 
 <main>
-  <!-- Lesson 1 – The Science -->
   <section class="lesson" id="lesson-1">
     <h2>Nobel Peace Prize 2025</h2>
     <p>The Nobel Peace Prize for 2025 was awarded for significant contributions to humanitarian efforts and global peace initiatives, recognizing the role of civil society.</p>
@@ -137,7 +171,6 @@ footer{
     <button class="nav next">Next →</button>
   </section>
 
-  <!-- Lesson 2 – Recent International Agreements -->
   <section class="lesson hidden" id="lesson-2">
     <h2>India's New Ports as Green Hydrogen Hubs</h2>
     <p>Green hydrogen is produced through the electrolysis of water using renewable energy sources, such as wind, solar, or hydroelectric power, resulting in zero carbon emissions.</p>
@@ -151,7 +184,6 @@ footer{
     <button class="nav next">Next →</button>
   </section>
 
-  <!-- Lesson 3 – What You Can Do -->
   <section class="lesson hidden" id="lesson-3">
     <h2>UK PM Keir Starmer's Visit</h2>
     <p>From October 8 to 9, 2025, UK Prime Minister Keir Starmer visited India. Key highlights included a focus on trade relations, the launch of the India-UK Fintech partnership, and plans for UK university campuses in India.</p>
@@ -169,12 +201,11 @@ footer{
   © 2025 E‑Learning
 </footer>
 
-<!-- Completion overlay -->
 <div id="completeOverlay">
   <div class="msg">
     <h2>Course Completed!</h2>
     <p>Thank you for learning about daily Current Affairs.</p>
-  </div>
+    </div>
 </div>
 
 <script>
@@ -183,23 +214,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const lessons = [...document.querySelectorAll('.lesson')];
   const total = lessons.length;
   const progress = document.getElementById('progress');
+  const overlay = document.getElementById('completeOverlay'); // Get the overlay element
 
   const show = i => {
     lessons.forEach((el, idx) => el.classList.toggle('hidden', idx !== i));
     progress.textContent = `Lesson ${i+1} of ${total}`;
   };
-
+  
+  
   lessons.forEach((lesson, i) => {
     const next = lesson.querySelector('.next');
     const prev = lesson.querySelector('.prev');
     const finish = lesson.querySelector('.finish');
-
+    
     if (next) next.onclick = () => show(i+1);
     if (prev) prev.onclick = () => show(i-1);
     if (finish) finish.onclick = () => 
     // show completion overlay
-    document.getElementById('completeOverlay').classList.add('show');
+    overlay.classList.add('show');
   });
+  
+  // Function to close the overlay
+  const closeOverlay = () => {
+    overlay.classList.remove('show');
+  };
+  // Listener to close the overlay by clicking the backdrop
+  overlay.onclick = (e) => {
+    if (e.target === overlay) {
+      closeOverlay();
+    }
+  };
 
   show(0); // start with lesson 1
 });
