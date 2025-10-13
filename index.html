@@ -1,260 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E‑Learning – Current Affairs</title>
-<style>
-/* ---------- Global reset & typography ---------- */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:100%}
-body{
-  font-family:system-ui,Arial,sans-serif;
-  line-height:1.5;
-  background:#fafafa;
-  color:#222;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-/* ---------- Dark mode variables ---------- */
-:root{
-  --bg:#fafafa;--fg:#222;--accent:#0066cc;
-  --card:#fff;--shadow:#ddd;
-}
-[data-theme="dark"]{
-  --bg:#1e1e1e;--fg:#e0e0e0;--accent:#3399ff;
-  --card:#2a2a2a;--shadow:#000;
-}
-body{background:var(--bg);color:var(--fg)}
-
-/* ---------- Header ---------- */
-header{
-  background:var(--accent);
-  color:#fff;
-  padding:1rem;
-  text-align:center;
-  position:sticky;top:0;z-index:10;
-}
-header h1{font-size:1.5rem;margin-bottom:.3rem}
-#progress{font-size:.9rem;opacity:.8}
-
-/* ---------- Dark‑mode toggle ---------- */
-#theme-toggle{
-  position:absolute;right:1rem;top:1rem;
-  background:rgba(255,255,255,.2);
-  border:none;color:#fff;padding:.3rem .6rem;
-  border-radius:4px;cursor:pointer;
-}
-
-/* ---------- Main layout (responsive grid) ---------- */
-main{
-  flex:1;
-  max-width:900px;
-  margin:2rem auto;
-  padding:0 1rem;
-  display:grid;
-  gap:1.5rem;
-  grid-template-columns:1fr;
-}
-
-/* ---------- Lesson cards ---------- */
-.lesson{
-  background:var(--card);
-  border-radius:8px;
-  box-shadow:0 2px 6px var(--shadow);
-  padding:1.2rem;
-  display:none;
-  animation:fade .5s forwards;
-}
-.lesson:not(.hidden){display:block}
-.hidden{display:none}
-.lesson h2{margin-bottom:.5rem;color:var(--accent)}
-.lesson p{margin:.8rem 0}
-
-/* ---------- Navigation buttons ---------- */
-button.nav{
-  background:var(--accent);color:#fff;border:none;
-  padding:.5rem 1rem;border-radius:4px;cursor:pointer;
-  margin-top:.8rem;
-}
-button.nav:hover{background:#0055aa}
-
-/* ---------- Footer ---------- */
-footer{
-  background:#2d2d2d;color:#fff;text-align:center;padding:.8rem;
-  font-size:.85rem;
-}
-
-/* ---------- Animations ---------- */
-@keyframes fade{from{opacity:0}to{opacity:1}}
-@keyframes pop{
-  0%   {transform:scale(0);opacity:0;}
-  60%  {transform:scale(1.2);opacity:1;}
-  100% {transform:scale(1);opacity:1;}
-}
-
-/* ---------- Completion overlay ---------- */
-#completeOverlay{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.6);
-  display:flex;align-items:center;justify-content:center;
-  visibility:hidden;opacity:0;transition:opacity .3s;
-}
-#completeOverlay.show{
-  visibility:visible;opacity:1;
-}
-#completeOverlay .msg{
-  background:#fff;padding:2rem 3rem;border-radius:12px;
-  text-align:center;animation:pop .6s ease-out;
-  /* Responsive additions */
-  max-width: 90%;
-  margin: 1rem;
-}
-#completeOverlay .msg h2{
-  margin:0 0 .5rem;color:var(--accent);
-}
-.msg p{color: #000;}
-
-
-/* ======================================= */
-/* ---------- Media Queries for smaller devices ---------- */
-/* ======================================= */
-
-@media (max-width: 480px) {
-    /* Adjust font sizes for mobile readability */
-    header h1 {
-        font-size: 1.3rem;
-    }
-    
-    .lesson h2 {
-        font-size: 1.2rem;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Learning - Current Affairs</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
     }
 
-    /* Adjust padding in the header */
+    html {
+      font-size: 100%
+    }
+
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      line-height: 1.5;
+      background: #fafafa;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    :root {
+      --bg: #fafafa;
+      --fg: #222;
+      --accent: #0066cc;
+      --card: #fff;
+      --shadow: #ddd;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1e1e1e;
+      --fg: #e0e0e0;
+      --accent: #3399ff;
+      --card: #2a2a2a;
+      --shadow: #000;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg)
+    }
+
     header {
-        padding: 0.8rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    
-    /* Adjust dark-mode toggle position for less crowded header */
+
+    header h1 {
+      font-size: 1.5rem;
+      margin-bottom: .3rem
+    }
+
+    #progress {
+      font-size: .9rem;
+      opacity: .8
+    }
+
     #theme-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background: rgba(255, 255, 255, .2);
+      border: none;
+      color: #fff;
+      padding: .3rem .6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+
+    .lesson {
+      background: var(--card);
+      border-radius: 8px;
+      box-shadow: 0 2px 6px var(--shadow);
+      padding: 1.2rem;
+      display: none;
+      animation: fade .5s forwards;
+    }
+
+    .lesson:not(.hidden) {
+      display: block
+    }
+
+    .hidden {
+      display: none
+    }
+
+    .lesson h2 {
+      margin-bottom: .5rem;
+      color: var(--accent)
+    }
+
+    .lesson p {
+      margin: .8rem 0
+    }
+
+    button.nav {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: .5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: .8rem;
+    }
+
+    button.nav:hover {
+      background: #0055aa
+    }
+
+    footer {
+      background: #2d2d2d;
+      color: #fff;
+      text-align: center;
+      padding: .8rem;
+      font-size: .85rem;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      60% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    #completeOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    #completeOverlay.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    #completeOverlay .msg {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      text-align: center;
+      animation: pop .6s ease-out;
+      max-width: 90%;
+      margin: 1rem;
+    }
+
+    #completeOverlay .msg h2 {
+      margin: 0 0 .5rem;
+      color: var(--accent);
+    }
+
+    .msg p {
+      color: #000;
+    }
+
+
+    @media (max-width: 480px) {
+
+      header h1 {
+        font-size: 1.3rem;
+      }
+
+      .lesson h2 {
+        font-size: 1.2rem;
+      }
+
+      header {
+        padding: 0.8rem;
+      }
+
+      #theme-toggle {
         right: 0.5rem;
         top: 0.5rem;
         padding: 0.2rem 0.5rem;
-    }
-    
-    /* Adjust completion message padding */
-    #completeOverlay .msg {
+      }
+
+      #completeOverlay .msg {
         padding: 1.5rem 2rem;
+      }
     }
-}
-</style>
+  </style>
 </head>
+
 <body>
-<header>
-  <h1>Daily Current Affairs</h1>
-  <div id="progress"></div>
-  <button id="theme-toggle">🌙</button>
-</header>
+  <header>
+    <h1>Daily Current Affairs</h1>
+    <div id="progress"></div>
+    <button id="theme-toggle">🌙</button>
+  </header>
 
-<main>
-  <section class="lesson" id="lesson-1">
-    <h2>Nobel Peace Prize 2025</h2>
-    <p>The Nobel Peace Prize for 2025 was awarded for significant contributions to humanitarian efforts and global peace initiatives, recognizing the role of civil society.</p>
-    <p><strong>Key Highlights :</strong></p>
-    <ul>
-      <li>Awarded for contributions that foster dialogue and social cohesion, the prize emphasized the importance of civic engagement in achieving lasting peace.</li>
-      <li>The Nobel Committee emphasized the recipients' efforts in humanitarian assistance and their commitment to protecting human rights in conflict zones.</li>
-      <li>The prize was jointly awarded to three organizations recognized for their roles in promoting diplomacy and conflict resolution across various regions.</li>
-    </ul>
-    <button class="nav next">Next →</button>
-  </section>
+  <main>
+    <section class="lesson" id="lesson-1">
+      <h2>Nobel Peace Prize 2025</h2>
+      <p>The Nobel Peace Prize for 2025 was awarded for significant contributions to humanitarian efforts and global
+        peace initiatives, recognizing the role of civil society.</p>
+      <p><strong>Key Highlights :</strong></p>
+      <ul>
+        <li>Awarded for contributions that foster dialogue and social cohesion, the prize emphasized the importance of
+          civic engagement in achieving lasting peace.</li>
+        <li>The Nobel Committee emphasized the recipients' efforts in humanitarian assistance and their commitment to
+          protecting human rights in conflict zones.</li>
+        <li>The prize was jointly awarded to three organizations recognized for their roles in promoting diplomacy and
+          conflict resolution across various regions.</li>
+      </ul>
+      <button class="nav next">Next →</button>
+    </section>
 
-  <section class="lesson hidden" id="lesson-2">
-    <h2>India's New Ports as Green Hydrogen Hubs</h2>
-    <p>Green hydrogen is produced through the electrolysis of water using renewable energy sources, such as wind, solar, or hydroelectric power, resulting in zero carbon emissions.</p>
-    <p><strong>Key Highlights :</strong></p>
-    <ul>
-        <li>The Indian government recognized three ports as green hydrogen hubs to promote sustainable energy solutions and enhance energy security.</li>
-        <li>India's move to designate ports as green hydrogen hubs is part of a larger strategy to transition to renewable energy and reduce carbon emissions.</li>
-        <li>Many countries are engaging in international partnerships to share knowledge, research, and technology to advance green hydrogen projects globally.</li>
-    </ul>
-    <button class="nav prev">← Prev</button>
-    <button class="nav next">Next →</button>
-  </section>
+    <section class="lesson hidden" id="lesson-2">
+      <h2>India's New Ports as Green Hydrogen Hubs</h2>
+      <p>Green hydrogen is produced through the electrolysis of water using renewable energy sources, such as wind,
+        solar, or hydroelectric power, resulting in zero carbon emissions.</p>
+      <p><strong>Key Highlights :</strong></p>
+      <ul>
+        <li>The Indian government recognized three ports as green hydrogen hubs to promote sustainable energy solutions
+          and enhance energy security.</li>
+        <li>India's move to designate ports as green hydrogen hubs is part of a larger strategy to transition to
+          renewable energy and reduce carbon emissions.</li>
+        <li>Many countries are engaging in international partnerships to share knowledge, research, and technology to
+          advance green hydrogen projects globally.</li>
+      </ul>
+      <button class="nav prev">← Prev</button>
+      <button class="nav next">Next →</button>
+    </section>
 
-  <section class="lesson hidden" id="lesson-3">
-    <h2>UK PM Keir Starmer's Visit</h2>
-    <p>From October 8 to 9, 2025, UK Prime Minister Keir Starmer visited India. Key highlights included a focus on trade relations, the launch of the India-UK Fintech partnership, and plans for UK university campuses in India.</p>
-    <p><strong>Key Highlights :</strong></p>
-    <ul>
-      <li>The visit aimed at enhancing India-UK trade relations, with significant investment announcements and collaborations, particularly in the fintech sector.</li>
-      <li>CEOs from both countries participated in discussions to solidify economic and academic partnerships.</li>
-    </ul>
-    <button class="nav prev">← Prev</button>
-    <button class="nav finish">Finish 🎉</button>
-  </section>
-</main>
+    <section class="lesson hidden" id="lesson-3">
+      <h2>UK PM Keir Starmer's Visit</h2>
+      <p>From October 8 to 9, 2025, UK Prime Minister Keir Starmer visited India. Key highlights included a focus on
+        trade relations, the launch of the India-UK Fintech partnership, and plans for UK university campuses in India.
+      </p>
+      <p><strong>Key Highlights :</strong></p>
+      <ul>
+        <li>The visit aimed at enhancing India-UK trade relations, with significant investment announcements and
+          collaborations, particularly in the fintech sector.</li>
+        <li>CEOs from both countries participated in discussions to solidify economic and academic partnerships.</li>
+      </ul>
+      <button class="nav prev">← Prev</button>
+      <button class="nav finish">Finish 🎉</button>
+    </section>
+  </main>
 
-<footer>
-  © 2025 E‑Learning
-</footer>
+  <footer>
+    © 2025 E-Learning
+  </footer>
 
-<div id="completeOverlay">
-  <div class="msg">
-    <h2>Course Completed!</h2>
-    <p>Thank you for learning about daily Current Affairs.</p>
+  <div id="completeOverlay">
+    <div class="msg">
+      <h2>Course Completed!</h2>
+      <p>Thank you for learning about daily Current Affairs.</p>
     </div>
-</div>
+  </div>
 
-<script>
-/* ---------- Navigation & progress ---------- */
-document.addEventListener('DOMContentLoaded', () => {
-  const lessons = [...document.querySelectorAll('.lesson')];
-  const total = lessons.length;
-  const progress = document.getElementById('progress');
-  const overlay = document.getElementById('completeOverlay'); // Get the overlay element
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const lessons = [...document.querySelectorAll('.lesson')];
+      const total = lessons.length;
+      const progress = document.getElementById('progress');
+      const overlay = document.getElementById('completeOverlay');
 
-  const show = i => {
-    lessons.forEach((el, idx) => el.classList.toggle('hidden', idx !== i));
-    progress.textContent = `Lesson ${i+1} of ${total}`;
-  };
-  
-  
-  lessons.forEach((lesson, i) => {
-    const next = lesson.querySelector('.next');
-    const prev = lesson.querySelector('.prev');
-    const finish = lesson.querySelector('.finish');
-    
-    if (next) next.onclick = () => show(i+1);
-    if (prev) prev.onclick = () => show(i-1);
-    if (finish) finish.onclick = () => 
-    // show completion overlay
-    overlay.classList.add('show');
-  });
-  
-  // Function to close the overlay
-  const closeOverlay = () => {
-    overlay.classList.remove('show');
-  };
-  // Listener to close the overlay by clicking the backdrop
-  overlay.onclick = (e) => {
-    if (e.target === overlay) {
-      closeOverlay();
-    }
-  };
+      const show = i => {
+        lessons.forEach((el, idx) => el.classList.toggle('hidden', idx !== i));
+        progress.textContent = `Lesson ${i + 1} of ${total}`;
+      };
 
-  show(0); // start with lesson 1
-});
 
-/* ---------- Dark‑mode toggle ---------- */
-const toggle = document.getElementById('theme-toggle');
-toggle.onclick = () => {
-  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.documentElement.setAttribute('data-theme', dark ? '' : 'dark');
-  toggle.textContent = dark ? '🌙' : '☀️';
-};
-</script>
+      lessons.forEach((lesson, i) => {
+        const next = lesson.querySelector('.next');
+        const prev = lesson.querySelector('.prev');
+        const finish = lesson.querySelector('.finish');
+
+        if (next) next.onclick = () => show(i + 1);
+        if (prev) prev.onclick = () => show(i - 1);
+        if (finish) finish.onclick = () =>
+          overlay.classList.add('show');
+      });
+
+      const closeOverlay = () => {
+        overlay.classList.remove('show');
+      };
+      overlay.onclick = (e) => {
+        if (e.target === overlay) {
+          closeOverlay();
+        }
+      };
+
+      show(0);
+    });
+
+    const toggle = document.getElementById('theme-toggle');
+    toggle.onclick = () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', dark ? '' : 'dark');
+      toggle.textContent = dark ? '🌙' : '☀️';
+    };
+  </script>
 </body>
+
 </html>
