@@ -1,7 +1,7 @@
 const newsContainer = document.getElementById("news-container");
 
 // Replace with any RSS feed URL
-const rssUrl = encodeURIComponent("https://www.hindustantimes.com/feeds/rss/trending/rssfeed.xml");
+const rssUrl = encodeURIComponent("https://www.hindustantimes.com/feeds/rss/world-news/rssfeed.xml");
 
 async function fetchNews() {
   newsContainer.innerHTML = "<p>Loading news...</p>";
