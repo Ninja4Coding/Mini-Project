@@ -1,3 +1,14 @@
+document.getElementById('pencet').addEventListener('click', function () {
+    const navLinks = document.querySelector('nav ul');
+    navLinks.classList.toggle('active');
+    this.classList.toggle('Diam');
+});
+
+
+
+
+
+
 const newsContainer = document.getElementById("news-container");
 
 // Replace with any RSS feed URL

@@ -33,3 +33,9 @@ function displayNews(articles) {
 
 // Load news on page load
 window.addEventListener("load", fetchNews);
+
+document.getElementById('pencet').addEventListener('click', function () {
+    const navLinks = document.querySelector('nav ul');
+    navLinks.classList.toggle('active');
+    this.classList.toggle('Diam');
+});
